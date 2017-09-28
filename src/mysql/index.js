@@ -69,7 +69,6 @@ apiRouter.post('/register',bodyParser.json(),(req,res) => {
 			}
 		})
 		if (success) {
-			console.log(111);
 			connection.query(`INSERT INTO userInfo(id,name,pwd) VALUES(${length},"${reqData.name}","${reqData.pwd}")`, (err,result) => {
 				if (err) throw err;
 				res.json({
