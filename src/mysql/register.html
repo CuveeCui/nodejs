@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>注册页</title>
+	<script src='./node_modules/axios/dist/axios.js'></script>
+	<link rel="stylesheet" href="css/reset.css">
+	<style>
+		body {
+			width: 80%;
+			margin: 0 auto;
+		}
+		.register {
+			width: 400px;
+			margin: 50px auto;
+			border: 1px solid rgb(177,177,250);
+			border-radius: 10px;
+			color: #999;
+		}
+		.userName,.pwd,.submit {
+			width: 80%;
+			margin: 10px auto;
+		}
+		input {
+			width: 230px;
+			height: 44px;
+			line-height: 44px;
+			border: 1px solid rgb(200,200,200);
+			border-radius: 8px;
+			padding-left: 10px;
+		}
+		button {
+			display: block;
+			width: 200px;
+			margin: 0 auto;
+			color: rgb(255,255,255);
+			font-size: 16px;
+			text-align: center;
+			height: 44px;
+			line-height: 44px;
+			background-color: rgb(17,100,100);
+			border-radius: 8px;
+			cursor: pointer;
+		}
+		.has_account {
+			text-align: right;
+			font-size: 14px;
+			padding-right: 10px;
+			padding-bottom: 10px;
+		}
+	</style>
+</head>
+<body>
+	<div class="register">
+		<div class="userName">
+			<label for="">用户名：</label>
+			<input type="text" placeholder="请输入用户名">
+		</div>
+		<div class="pwd">
+			<label for="">密&nbsp;&nbsp;&nbsp;码：</label>
+			<input type="password" placeholder="请输入密码">
+		</div>
+		<div class="submit">
+			<button>注册</button>
+		</div>
+		<div class="has_account">
+			已有账号，去 <a href="login.html">登录</a>
+		</div>
+	</div>
+</body>
+<script>
+	function getDom(cls) {
+		return document.querySelector(cls)
+	}
+	let name = getDom('.userName input');
+	let pwd = getDom('.pwd input');
+	let submit = getDom('.submit button');
+	submit.addEventListener('click',() => {
+		axios.post('/api/register',{
+			name: name.value,
+			pwd: pwd.value
+		}).then(res => {
+			let result = res.data;
+			if (result.errno == 0) {
+				localStorage.setItem('userName',name.value);
+				location.href = 'login.html';
+			} else {
+				alert(result.message);
+			}
+		}).catch(err => {
+			alert(err);
+		})
+	})
+</script>
+</html>
