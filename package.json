@@ -16,5 +16,10 @@
   "bugs": {
     "url": "https://github.com/stephonCzy/nodejs/issues"
   },
-  "homepage": "https://github.com/stephonCzy/nodejs#readme"
+  "homepage": "https://github.com/stephonCzy/nodejs#readme",
+  "devDependencies": {
+    "express": "^4.16.0",
+    "http-proxy-middleware": "^0.17.4",
+    "log4js": "^2.3.4"
+  }
 }
